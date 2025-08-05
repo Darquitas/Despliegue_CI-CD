@@ -1,0 +1,37 @@
+name: Pipeline de Producción
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-test-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar código
+        uses: actions/checkout@v3
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Instalar dependencias
+        run: npm install
+
+      - name: Ejecutar pruebas con cobertura
+        run: npm run test:coverage
+
+      - name: Validar cobertura mínima 85%
+        run: |
+          COVERAGE=$(node -pe "require('./coverage/coverage-summary.json').total.statements.pct")
+          echo "Cobertura actual: $COVERAGE%"
+          if (( $(echo "$COVERAGE < 85" | bc -l) )); then
+            echo "Cobertura menor al 85%, fallando pipeline."
+            exit 1
+          fi
+
+      - name: Construir imagen Docker
+        run: docker build -t mi-api:latest .
