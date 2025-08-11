@@ -4,28 +4,30 @@
     "description": "API RESTful para despliegue con CI/CD, Jest y Docker",
     "main": "index.js",
     "scripts": {
-      "test": "jest",
-      "test:coverage": "jest --coverage --coverageReporters=json-summary"
+        "test": "jest",
+        "test:coverage": "jest --coverage --coverageReporters=json-summary"
     },
     "repository": {
-      "type": "git",
-      "url": "git+https://github.com/Darquitas/Despliegue_CI-CD.git"
+        "type": "git",
+        "url": "git+https://github.com/Darquitas/Despliegue_CI-CD.git"
     },
     "keywords": [
-      "ci-cd",
-      "jest",
-      "docker",
-      "api-rest"
+        "ci-cd",
+        "jest",
+        "docker",
+        "api-rest"
     ],
     "author": "",
     "license": "ISC",
     "bugs": {
-      "url": "https://github.com/Darquitas/Despliegue_CI-CD/issues"
+        "url": "https://github.com/Darquitas/Despliegue_CI-CD/issues"
     },
     "homepage": "https://github.com/Darquitas/Despliegue_CI-CD#readme",
     "devDependencies": {
-      "jest": "^30.0.5",
-      "supertest": "^7.1.4"
+        "jest": "^30.0.5",
+        "supertest": "^7.1.4"
+    },
+    "dependencies": {
+        "axios": "^1.11.0"
     }
-  }
-  
+}
