@@ -1,30 +1,26 @@
-const express = require('express');
-const ProductController = require('../controllers/productController');
+const express = require("express");
+const {
+  createProduct,
+  getAllProducts,
+  getProductById,
+  updateProduct,
+  deleteProduct,
+} = require("../controllers/productController");
 
 const router = express.Router();
 
-// CREATE
-router.post('/products', ProductController.createProduct);
+router.post("/products", createProduct);
+router.get("/products", getAllProducts);
+router.get("/products/:id", getProductById);
+router.put("/products/:id", updateProduct);
+router.delete("/products/:id", deleteProduct);
 
-// READ - Todos
-router.get('/products', ProductController.getAllProducts);
-
-// READ - Por ID
-router.get('/products/:id', ProductController.getProductById);
-
-// UPDATE
-router.put('/products/:id', ProductController.updateProduct);
-
-// DELETE
-router.delete('/products/:id', ProductController.deleteProduct);
-
-// Health check
-router.get('/health', (req, res) => {
+router.get("/health", (req, res) => {
   res.status(200).json({
     success: true,
-    message: 'Products Service está funcionando correctamente',
+    message: "Products Service funcionando correctamente",
     timestamp: new Date().toISOString(),
-    service: 'products-service'
+    service: "products-service",
   });
 });
 

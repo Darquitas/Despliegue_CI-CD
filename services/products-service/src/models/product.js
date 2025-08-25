@@ -1,46 +1,34 @@
-class Product {
-  constructor(id, name, category, price, stock, description, createdAt) {
-    this.id = id;
-    this.name = name;
-    this.category = category;
-    this.price = price;
-    this.stock = stock;
-    this.description = description;
-    this.createdAt = createdAt || new Date().toISOString();
-  }
+const { DataTypes } = require("sequelize");
+const sequelize = require("../config/db");
 
-  // Validar datos del producto
-  validate() {
-    const errors = [];
-    if (!this.name || this.name.trim().length < 2) {
-      errors.push('El nombre debe tener al menos 2 caracteres');
-    }
-    if (!this.category || this.category.trim().length < 2) {
-      errors.push('La categoría debe tener al menos 2 caracteres');
-    }
-    if (typeof this.price !== 'number' || this.price < 0) {
-      errors.push('El precio debe ser un número positivo');
-    }
-    if (typeof this.stock !== 'number' || this.stock < 0) {
-      errors.push('El stock debe ser un número positivo');
-    }
-    if (!this.description || this.description.trim().length < 5) {
-      errors.push('La descripción debe tener al menos 5 caracteres');
-    }
-    return errors;
-  }
-
-  toJSON() {
-    return {
-      id: this.id,
-      name: this.name,
-      category: this.category,
-      price: this.price,
-      stock: this.stock,
-      description: this.description,
-      createdAt: this.createdAt
-    };
-  }
-}
+const Product = sequelize.define("Product", {
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  category: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  price: {
+    type: DataTypes.FLOAT,
+    allowNull: false,
+    validate: {
+      min: 0,
+    },
+  },
+  stock: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    defaultValue: 0,
+    validate: {
+      min: 0,
+    },
+  },
+  description: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+});
 
 module.exports = Product;
