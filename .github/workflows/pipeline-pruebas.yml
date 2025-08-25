@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  test-job: # nombre único del job
+  test-job:
     name: Ejecutar pruebas en develop y PR a main
     runs-on: ubuntu-latest
 
