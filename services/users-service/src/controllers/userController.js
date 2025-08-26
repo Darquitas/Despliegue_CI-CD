@@ -1,4 +1,4 @@
-const User = require('../models/user');
+const User = require('../models/User');
 
 // Obtener todos los usuarios
 exports.getUsers = async (req, res) => {
