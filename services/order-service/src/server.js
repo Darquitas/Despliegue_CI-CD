@@ -1,8 +1,9 @@
 const express = require('express');
 const orderRoutes = require('./routes/orderRoutes');
+const sequelize = require("./config/db");
 
 const app = express();
-const PORT = process.env.PORT || 3003;
+const PORT = process.env.PORT || 3002;
 
 // Middleware para parsear JSON
 app.use(express.json());
@@ -25,51 +26,17 @@ app.use((req, res, next) => {
   next();
 });
 
+app.get("/", (req, res) => {
+  res.send("API funcionando 🚀");
+});
+
 // Rutas del microservicio
 app.use('/api', orderRoutes);
 
-// Ruta raíz
-app.get('/', (req, res) => {
-  res.json({
-    success: true,
-    message: 'Order Microservice API',
-    version: '1.0.0',
-    endpoints: {
-      health: 'GET /api/health',
-      orders: {
-        create: 'POST /api/orders',
-        getAll: 'GET /api/orders',
-        getById: 'GET /api/orders/:id',
-        update: 'PUT /api/orders/:id',
-        delete: 'DELETE /api/orders/:id'
-      }
-    }
+// Sincronizar DB y levantar servidor
+sequelize.sync().then(() => {
+  app.listen(PORT, () => {
+    console.log(`🚀 Order Service corriendo en puerto ${PORT}`);
+    console.log(`Order Service en: http://localhost:${PORT}`);
   });
 });
-
-// Middleware para manejar rutas no encontradas
-app.use('*', (req, res) => {
-  res.status(404).json({
-    success: false,
-    message: 'Ruta no encontrada'
-  });
-});
-
-// Middleware para manejar errores
-app.use((error, req, res, next) => {
-  console.error('Error:', error);
-  res.status(500).json({
-    success: false,
-    message: 'Error interno del servidor',
-    error: process.env.NODE_ENV === 'development' ? error.message : 'Algo salió mal'
-  });
-});
-
-// Iniciar servidor
-app.listen(PORT, () => {
-  console.log(`🚀 Order Service corriendo en puerto ${PORT}`);
-  console.log(`📋 Documentación: http://localhost:${PORT}`);
-  console.log(`🏥 Health check: http://localhost:${PORT}/api/health`);
-});
-
-module.exports = app;

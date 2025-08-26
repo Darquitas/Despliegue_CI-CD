@@ -1,31 +1,24 @@
-const express = require('express');
-const OrderController = require('../controllers/orderController');
+const express = require("express");
+const {
+  createOrder,
+  getAllOrders,
+  getOrderById,
+  updateOrder,
+  deleteOrder
+} = require("../controllers/orderController");
 
 const router = express.Router();
 
-// CREATE
-router.post('/orders', OrderController.createOrder);
-
-// READ - Todas
-router.get('/orders', OrderController.getAllOrders);
-
-// READ - Por ID
-router.get('/orders/:id', OrderController.getOrderById);
-
-// UPDATE
-router.put('/orders/:id', OrderController.updateOrder);
-
-// DELETE
-router.delete('/orders/:id', OrderController.deleteOrder);
+// CRUD Orders
+router.post("/orders", createOrder);
+router.get("/orders", getAllOrders);
+router.get("/orders/:id", getOrderById);
+router.put("/orders/:id", updateOrder);
+router.delete("/orders/:id", deleteOrder);
 
 // Health check
-router.get('/health', (req, res) => {
-  res.status(200).json({
-    success: true,
-    message: 'Order Service está funcionando correctamente',
-    timestamp: new Date().toISOString(),
-    service: 'order-service'
-  });
+router.get("/health", (req, res) => {
+  res.json({ success: true, service: "order-service", timestamp: new Date().toISOString() });
 });
 
 module.exports = router;

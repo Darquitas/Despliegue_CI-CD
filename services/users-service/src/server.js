@@ -17,11 +17,11 @@ app.use("/api/users", userRouter);
 // Probar conexión y sincronizar DB
 sequelize.authenticate()
   .then(() => {
-    console.log("✅ Conectado a PostgreSQL");
+    console.log("Conectado a PostgreSQL");
     return sequelize.sync({ alter: true }); // crea/actualiza tablas
   })
   .then(() => {
-    console.log("✅ Tablas sincronizadas");
+    console.log("Tablas sincronizadas");
     app.listen(3000, () => {
       console.log("🚀 Servidor corriendo en http://localhost:3000");
     });

@@ -35,11 +35,11 @@ app.get("/", (req, res) => {
 // DB Sync y start
 sequelize.authenticate()
   .then(() => {
-    console.log("✅ Conectado a PostgreSQL (Products)");
+    console.log("Conectado a PostgreSQL (Products)");
     return sequelize.sync({ alter: true });
   })
   .then(() => {
-    console.log("✅ Tablas de productos sincronizadas");
+    console.log("Tablas de productos sincronizadas");
     app.listen(PORT, () => console.log(`🚀 Products Service en http://localhost:${PORT}`));
   })
   .catch((err) => console.error("❌ Error al conectar a la base:", err));
