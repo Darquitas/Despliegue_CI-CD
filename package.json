@@ -6,7 +6,8 @@
     "scripts": {
         "test": "mocha \"services/*-service/src/test/unit/*.js\"",
         "test:coverage": "nyc mocha \"services/*-service/src/test/unit/*.js\"",
-        "coverage:check": "nyc check-coverage"
+        "coverage:check": "nyc check-coverage",
+        "dev": "nodemon services/*-service/src/server.js"
     },
     "repository": {
         "type": "git",
