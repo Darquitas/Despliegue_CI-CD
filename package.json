@@ -60,7 +60,6 @@
         "functions": 60,
         "statements": 60
     }
-=======
   "name": "despliegue_ci-cd",
   "version": "1.0.0",
   "description": "API RESTful para despliegue con CI/CD, Jest y Docker",
