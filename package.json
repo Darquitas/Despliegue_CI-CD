@@ -1,4 +1,65 @@
 {
+    "name": "despliegue_ci-cd",
+    "version": "1.0.0",
+    "description": "API RESTful para despliegue con CI/CD, Jest y Docker",
+    "main": "index.js",
+    "scripts": {
+    "test": "mocha \"services/*-service/src/test/unit/*.js\"",
+    "test:coverage": "nyc mocha \"services/*-service/src/test/unit/*.js\"",
+    "coverage:check": "nyc check-coverage"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Darquitas/Despliegue_CI-CD.git"
+    },
+    "keywords": [
+        "ci-cd",
+        "jest",
+        "docker",
+        "api-rest"
+    ],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Darquitas/Despliegue_CI-CD/issues"
+    },
+    "homepage": "https://github.com/Darquitas/Despliegue_CI-CD#readme",
+    "devDependencies": {
+        "chai": "^4.5.0",
+        "chai-http": "^4.4.0",
+        "jest": "^30.0.5",
+        "mocha": "^11.7.1",
+        "nodemon": "^3.1.10",
+        "sequelize-cli": "^6.6.3",
+        "sinon": "^21.0.0",
+        "supertest": "^7.1.4",
+        "nyc": "^17.1.0"
+    },
+    "dependencies": {
+        "axios": "^1.11.0",
+        "dotenv": "^17.2.1",
+        "express": "^4.21.2",
+        "morgan": "^1.10.1",
+        "mysql2": "^3.14.3",
+        "pg": "^8.16.3",
+        "pg-hstore": "^2.3.4",
+        "sequelize": "^6.37.7"
+    },
+    "nyc": {
+        "reporter": ["text", "json", "html"],
+        "include": [
+            "services/users-service/src/controllers/*.js",
+            "services/products-service/src/controllers/*.js",
+            "services/order-service/src/controllers/*.js"
+        ],
+        "exclude": ["test/**", "node_modules/**"],
+        "all": true,
+        "check-coverage": true,
+        "lines": 60,
+        "branches": 60,
+        "functions": 60,
+        "statements": 60
+    }
   "name": "despliegue_ci-cd",
   "version": "1.0.0",
   "description": "API RESTful para despliegue con CI/CD, Jest y Docker",
