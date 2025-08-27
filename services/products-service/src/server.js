@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const productRoutes = require("./routes/productRoutes");
 const sequelize = require("./config/db");
@@ -29,7 +30,7 @@ app.use("/api", productRoutes);
 
 // Ruta raíz
 app.get("/", (req, res) => {
-  res.send("API funcionando 🚀");
+  res.send("Entidad de productos funcionando 🚀");
 });
 
 // DB Sync y start

@@ -4,9 +4,9 @@
     "description": "API RESTful para despliegue con CI/CD, Jest y Docker",
     "main": "index.js",
     "scripts": {
-    "test": "mocha \"services/*-service/src/test/unit/*.js\"",
-    "test:coverage": "nyc mocha \"services/*-service/src/test/unit/*.js\"",
-    "coverage:check": "nyc check-coverage"
+        "test": "mocha \"services/*-service/src/test/unit/*.js\"",
+        "test:coverage": "nyc mocha \"services/*-service/src/test/unit/*.js\"",
+        "coverage:check": "nyc check-coverage"
     },
     "repository": {
         "type": "git",
@@ -30,15 +30,16 @@
         "jest": "^30.0.5",
         "mocha": "^11.7.1",
         "nodemon": "^3.1.10",
+        "nyc": "^17.1.0",
         "sequelize-cli": "^6.6.3",
         "sinon": "^21.0.0",
-        "supertest": "^7.1.4",
-        "nyc": "^17.1.0"
+        "supertest": "^7.1.4"
     },
     "dependencies": {
         "axios": "^1.11.0",
         "dotenv": "^17.2.1",
         "express": "^4.21.2",
+        "http-proxy-middleware": "^3.0.5",
         "morgan": "^1.10.1",
         "mysql2": "^3.14.3",
         "pg": "^8.16.3",
@@ -46,13 +47,20 @@
         "sequelize": "^6.37.7"
     },
     "nyc": {
-        "reporter": ["text", "json", "html"],
+        "reporter": [
+            "text",
+            "json",
+            "html"
+        ],
         "include": [
             "services/users-service/src/controllers/*.js",
             "services/products-service/src/controllers/*.js",
             "services/order-service/src/controllers/*.js"
         ],
-        "exclude": ["test/**", "node_modules/**"],
+        "exclude": [
+            "test/**",
+            "node_modules/**"
+        ],
         "all": true,
         "check-coverage": true,
         "lines": 60,
