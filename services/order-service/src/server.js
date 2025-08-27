@@ -2,6 +2,7 @@ const express = require('express');
 const orderRoutes = require('./routes/orderRoutes');
 const sequelize = require("./config/db");
 
+require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3002;
 
@@ -27,7 +28,7 @@ app.use((req, res, next) => {
 });
 
 app.get("/", (req, res) => {
-  res.send("API funcionando 🚀");
+  res.send("Entidad de ordenes funcionando 🚀");
 });
 
 // Rutas del microservicio

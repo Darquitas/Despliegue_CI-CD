@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const userRouter = require("./routes/userRoutes");
 const sequelize = require("./config/db"); // conexión a PostgreSQL
@@ -7,7 +8,7 @@ app.use(express.json());
 
 // Ruta raíz para verificar que la API está viva
 app.get("/", (req, res) => {
-  res.send("API funcionando 🚀");
+  res.send("Entidad de usuarios funcionando 🚀");
 });
 
 // Rutas de usuarios

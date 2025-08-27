@@ -1,0 +1,90 @@
+version: '3.9'
+services:
+  postgres:
+    restart: always
+    image: postgres:15-alpine
+    container_name: techstore-db
+    environment:
+      POSTGRES_DB: techstore
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: santy10tc
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  gateway:
+    restart: always
+    build: .
+    container_name: gateway
+    ports:
+      - "3004:3004"
+    depends_on:
+      - users-service
+      - products-service
+      - order-service
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: techstore
+      DB_USER: postgres
+      DB_PASS: santy10tc
+
+  users-service:
+    restart: always
+    build:
+      context: .
+      dockerfile: services/users-service/Dockerfile
+    container_name: users-service
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: techstore
+      DB_USER: postgres
+      DB_PASS: santy10tc
+
+  products-service:
+    restart: always
+    build:
+      context: .
+      dockerfile: services/products-service/Dockerfile
+    container_name: products-service
+    ports:
+      - "3001:3001"
+    depends_on:
+      - postgres
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: techstore
+      DB_USER: postgres
+      DB_PASS: santy10tc
+
+  order-service:
+    restart: always
+    build:
+      context: .
+      dockerfile: services/order-service/Dockerfile
+    container_name: order-service
+    ports:
+      - "3002:3002"
+    depends_on:
+      - postgres
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: techstore
+      DB_USER: postgres
+      DB_PASS: santy10tc
+
+volumes:
+  pgdata:
