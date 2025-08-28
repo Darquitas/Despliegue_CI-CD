@@ -24,7 +24,7 @@ jobs:
       - name: Ejecutar pruebas con cobertura
         run: npm run test:coverage
 
-      - name: Validar cobertura mínima 85%
+      - name: Validar cobertura mínima del 85%
         run: |
           COVERAGE=$(node -pe "require('./coverage/coverage-summary.json').total.statements.pct")
           echo "Cobertura actual: $COVERAGE%"
