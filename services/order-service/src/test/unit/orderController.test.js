@@ -14,7 +14,7 @@ function mockRes() {
 describe('orderController', () => {
   afterEach(() => sinon.restore());
 
-  /*describe('createOrder', () => {
+  describe('createOrder', () => {
     it('debe crear una orden', async () => {
       const fakeOrder = { userId: 1, products: [], total: 100, status: 'pendiente' };
       sinon.stub(Order, 'create').resolves(fakeOrder);
@@ -24,7 +24,7 @@ describe('orderController', () => {
       expect(res.status.calledWith(201)).to.be.true;
       expect(res.json.called).to.be.true;
     });
-  });*/
+  });
 
   describe('getAllOrders', () => {
     it('debe devolver todas las ordenes', async () => {
@@ -38,7 +38,7 @@ describe('orderController', () => {
     });
   });
 
-  /*describe('getOrderById', () => {
+  describe('getOrderById', () => {
     it('debe devolver una orden por id', async () => {
       const fakeOrder = { id: 1 };
       sinon.stub(Order, 'findByPk').resolves(fakeOrder);
@@ -55,7 +55,7 @@ describe('orderController', () => {
       await orderController.getOrderById(req, res);
       expect(res.status.calledWith(404)).to.be.true;
     });
-  });*/
+  });
 
   describe('updateOrder', () => {
     it('debe actualizar una orden existente', async () => {

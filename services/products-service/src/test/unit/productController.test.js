@@ -14,7 +14,7 @@ function mockRes() {
 describe('productController', () => {
   afterEach(() => sinon.restore());
 
-  /*describe('createProduct', () => {
+  describe('createProduct', () => {
     it('debe crear un producto nuevo', async () => {
       sinon.stub(Product, 'findOne').resolves(null);
       const fakeProduct = { name: 'prod', category: 'cat', price: 10, stock: 5, description: 'desc' };
@@ -34,7 +34,7 @@ describe('productController', () => {
       expect(res.status.calledWith(409)).to.be.true;
       expect(res.json.firstCall.args[0].success).to.be.false;
     });
-  });*/
+  });
 
   describe('getAllProducts', () => {
     it('debe devolver todos los productos', async () => {
@@ -48,7 +48,7 @@ describe('productController', () => {
     });
   });
 
-  /*describe('getProductById', () => {
+  describe('getProductById', () => {
     it('debe devolver un producto por id', async () => {
       const fakeProduct = { name: 'prod' };
       sinon.stub(Product, 'findByPk').resolves(fakeProduct);
@@ -65,7 +65,7 @@ describe('productController', () => {
       await productController.getProductById(req, res);
       expect(res.status.calledWith(404)).to.be.true;
     });
-  });*/
+  });
 
   describe('updateProduct', () => {
     it('debe actualizar un producto existente', async () => {
