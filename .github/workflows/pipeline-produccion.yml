@@ -32,6 +32,3 @@ jobs:
             echo "Cobertura menor al 85%, fallando pipeline."
             exit 1
           fi
-
-      - name: Construir imagen Docker
-        run: docker build -t mi-api:latest .
