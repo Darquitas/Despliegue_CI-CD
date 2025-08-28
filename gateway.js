@@ -1,15 +1,21 @@
-
 const express = require('express');
+const { createProxyMiddleware } = require('http-proxy-middleware');
+const { spawn } = require('child_process');
+
 const app = express();
 
-// Integrar rutas de microservicios directamente
-const userRoutes = require('./services/users-service/src/routes/userRoutes');
-const productRoutes = require('./services/products-service/src/routes/productRoutes');
-const orderRoutes = require('./services/order-service/src/routes/orderRoutes');
+// Iniciar microservicios en paralelo
+spawn('node', ['services/users-service/src/server.js'], { stdio: 'inherit' });
+spawn('node', ['services/products-service/src/server.js'], { stdio: 'inherit' });
+spawn('node', ['services/order-service/src/server.js'], { stdio: 'inherit' });
 
-app.use('/users', userRoutes);
-app.use('/products', productRoutes);
-app.use('/orders', orderRoutes);
+// Proxy para Users
+app.use('/users', createProxyMiddleware({ target: 'http://localhost:3000', changeOrigin: true }));
+// Proxy para Products
+app.use('/products', createProxyMiddleware({ target: 'http://localhost:3001', changeOrigin: true }));
+// Proxy para Orders
+app.use('/orders', createProxyMiddleware({ target: 'http://localhost:3002', changeOrigin: true }));
+
 
 app.get('/', (req, res) => {
   res.json({
@@ -22,7 +28,6 @@ app.get('/', (req, res) => {
   });
 });
 
-const PORT = process.env.PORT || 3004;
-app.listen(PORT, () => {
-  console.log(`API Gateway corriendo en puerto 🚀 http://localhost:${PORT}`);
+app.listen(3004, () => {
+  console.log('API Gateway corriendo en puerto 🚀 http://localhost:3004');
 });
