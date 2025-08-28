@@ -1,6 +1,6 @@
-
 const express = require('express');
 const app = express();
+app.use(express.json());
 
 // Integrar rutas de microservicios directamente
 const userRoutes = require('./services/users-service/src/routes/userRoutes');
