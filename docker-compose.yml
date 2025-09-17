@@ -1,23 +1,5 @@
 version: '3.9'
 services:
-  postgres:
-    restart: always
-    image: postgres:15-alpine
-    container_name: techstore-db
-    environment:
-      POSTGRES_DB: techstore
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: santy10tc
-    ports:
-      - "5432:5432"
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
   gateway:
     restart: always
     build: .
@@ -29,11 +11,11 @@ services:
       - products-service
       - order-service
     environment:
-      DB_HOST: postgres
+      DB_HOST: awstechstore.cliuqok4wqq9.us-east-2.rds.amazonaws.com
       DB_PORT: 5432
-      DB_NAME: techstore
+      DB_NAME: awstechstore
       DB_USER: postgres
-      DB_PASS: santy10tc
+      DB_PASS: Santy10-tc1913
 
   users-service:
     restart: always
@@ -43,14 +25,12 @@ services:
     container_name: users-service
     ports:
       - "3000:3000"
-    depends_on:
-      - postgres
     environment:
-      DB_HOST: postgres
+      DB_HOST: awstechstore.cliuqok4wqq9.us-east-2.rds.amazonaws.com
       DB_PORT: 5432
-      DB_NAME: techstore
+      DB_NAME: awstechstore
       DB_USER: postgres
-      DB_PASS: santy10tc
+      DB_PASS: Santy10-tc1913
 
   products-service:
     restart: always
@@ -60,14 +40,12 @@ services:
     container_name: products-service
     ports:
       - "3001:3001"
-    depends_on:
-      - postgres
     environment:
-      DB_HOST: postgres
+      DB_HOST: awstechstore.cliuqok4wqq9.us-east-2.rds.amazonaws.com
       DB_PORT: 5432
-      DB_NAME: techstore
+      DB_NAME: awstechstore
       DB_USER: postgres
-      DB_PASS: santy10tc
+      DB_PASS: Santy10-tc1913
 
   order-service:
     restart: always
@@ -77,14 +55,9 @@ services:
     container_name: order-service
     ports:
       - "3002:3002"
-    depends_on:
-      - postgres
     environment:
-      DB_HOST: postgres
+      DB_HOST: awstechstore.cliuqok4wqq9.us-east-2.rds.amazonaws.com
       DB_PORT: 5432
-      DB_NAME: techstore
+      DB_NAME: awstechstore
       DB_USER: postgres
-      DB_PASS: santy10tc
-
-volumes:
-  pgdata:
+      DB_PASS: Santy10-tc1913
