@@ -22,7 +22,6 @@ app.get('/', (req, res) => {
   });
 });
 
-const PORT = process.env.PORT || 3004;
-app.listen(PORT, () => {
-  console.log(`API Gateway corriendo en puerto 🚀 http://localhost:${PORT}`);
+app.listen(3004, '0.0.0.0', () => {
+  console.log(`API Gateway corriendo en puerto 🚀 http://localhost:3004`);
 });
