@@ -22,6 +22,9 @@ app.get('/', (req, res) => {
   });
 });
 
-app.listen(3004, '0.0.0.0', () => {
-  console.log(`API Gateway corriendo en puerto 🚀 http://localhost:3004`);
+const PORT = 3004;
+const HOST = '0.0.0.0';
+
+app.listen(PORT, HOST, () => {
+  console.log(`🚀 API Gateway corriendo en http://${HOST}:${PORT}`);
 });
