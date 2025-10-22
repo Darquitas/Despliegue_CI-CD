@@ -1,5 +1,18 @@
 version: '3.9'
 services:
+  postgres-db:
+    image: postgres:15
+    container_name: postgres-db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Santy10-tc1913
+      POSTGRES_DB: techstore
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
   gateway:
     restart: always
     build: .
@@ -11,9 +24,9 @@ services:
       - products-service
       - order-service
     environment:
-      DB_HOST: awstechstore.cliuqok4wqq9.us-east-2.rds.amazonaws.com
+      DB_HOST: postgres-db
       DB_PORT: 5432
-      DB_NAME: awstechstore
+      DB_NAME: techstore
       DB_USER: postgres
       DB_PASS: Santy10-tc1913
 
@@ -25,10 +38,12 @@ services:
     container_name: users-service
     ports:
       - "3000:3000"
+    depends_on:
+      - postgres-db
     environment:
-      DB_HOST: awstechstore.cliuqok4wqq9.us-east-2.rds.amazonaws.com
+      DB_HOST: postgres-db
       DB_PORT: 5432
-      DB_NAME: awstechstore
+      DB_NAME: techstore
       DB_USER: postgres
       DB_PASS: Santy10-tc1913
 
@@ -40,10 +55,12 @@ services:
     container_name: products-service
     ports:
       - "3001:3001"
+    depends_on:
+      - postgres-db
     environment:
-      DB_HOST: awstechstore.cliuqok4wqq9.us-east-2.rds.amazonaws.com
+      DB_HOST: postgres-db
       DB_PORT: 5432
-      DB_NAME: awstechstore
+      DB_NAME: techstore
       DB_USER: postgres
       DB_PASS: Santy10-tc1913
 
@@ -55,9 +72,14 @@ services:
     container_name: order-service
     ports:
       - "3002:3002"
+    depends_on:
+      - postgres-db
     environment:
-      DB_HOST: awstechstore.cliuqok4wqq9.us-east-2.rds.amazonaws.com
+      DB_HOST: postgres-db
       DB_PORT: 5432
-      DB_NAME: awstechstore
+      DB_NAME: techstore
       DB_USER: postgres
       DB_PASS: Santy10-tc1913
+
+volumes:
+  postgres_data:
