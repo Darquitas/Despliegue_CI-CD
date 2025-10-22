@@ -14,3 +14,14 @@ yarn-error.log*
 
 #Visualizacion de pruebas
 .nyc_output/
+
+# Terraform
+terraform/.terraform/
+terraform/.terraform.lock.hcl
+*.tfstate
+*.tfstate.backup
+
+# Docker
+**/node_modules
+**/dist
+**/.env
