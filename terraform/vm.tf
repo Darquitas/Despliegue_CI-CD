@@ -74,7 +74,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
 
   admin_ssh_key {
     username   = "azureuser"
-    public_key = file("C:/Users/santi/.ssh/id_ed25519.pub") # <-- ruta corregida
+    public_key = file("C:/Users/santi/.ssh/id_rsa.pub") # <-- ruta corregida
   }
 
   computer_name                   = "techstorevm"
