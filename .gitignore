@@ -18,6 +18,7 @@ yarn-error.log*
 # Terraform
 terraform/.terraform/
 terraform/.terraform.lock.hcl
+terraform/backup_state_antes_destroy.json
 *.tfstate
 *.tfstate.backup
 
