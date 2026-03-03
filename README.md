@@ -4,8 +4,3 @@ Este proyecto implementa una infraestructura completa en **Azure** utilizando **
 
 ---
 
-## 🧩 Infraestructura con Terraform
-
-### 1️⃣ Autenticarse en Azure CLI
-```bash
-az login
