@@ -100,3 +100,4 @@ Confirma con **yes** para eliminar toda la infraestructura.
 - Revisa siempre las variables de Terraform antes de aplicar los cambios.  
 - Mantén las credenciales seguras y fuera del control de versiones.  
 - Puedes modificar los scripts SQL según las necesidades de la API.
+
